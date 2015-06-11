@@ -1,5 +1,28 @@
 var SERVER_URL = 'http://127.0.0.1:8000/api/';
 angular.module('starter.services', [])
+
+.factory('Games', function($http, $q) {
+var games = [];
+  return {
+    all: function(){
+      var dfd = $q.defer();
+      $http.get(SERVER_URL + "games").then(function(response){
+        games = response.data;
+        dfd.resolve(games);
+      });
+      return dfd.promise;
+    },
+    get: function(gameId) {
+		var game = [];
+		var dfd = $q.defer();
+       $http.get(SERVER_URL + "games/" + gameId).then(function(response){
+	   game = response.data.juego
+       dfd.resolve(game);
+      });
+      return dfd.promise;
+    }
+  }
+})
  
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array

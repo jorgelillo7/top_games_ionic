@@ -42,12 +42,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/dash',
     views: {
       'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+        templateUrl: 'templates/tab-game.html',
+        controller: 'DashCtrl',
+		resolve: {
+        allgames: function(Games) {
+          return Games.all(); }
+      }
       }
     }
   })
-
+  .state('tab.dash-detail', {
+      url: '/dash/:gameId',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-game-detail.html',
+          controller: 'GameDetailCtrl',
+		   resolve: {
+           onegames: function(Games, $stateParams) {
+          return Games.get($stateParams.gameId); }
+		}
+		}
+	  }
+    })
   .state('tab.chats', {
       url: '/chats',
       views: {
