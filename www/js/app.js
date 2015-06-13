@@ -21,6 +21,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
+.config(['$httpProvider', function($httpProvider) {
+
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];  
+    }
+])
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -33,7 +40,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab', {
     url: "/tab",
     abstract: true,
-    templateUrl: "templates/tabs.html"
+    templateUrl: function() {
+        if (ionic.Platform.isAndroid()) {
+            return  "templates/tabs-android.html";
+        }
+        return "templates/tabs-ios.html";
+    }
   })
 
   // Each tab has its own nav history stack:
@@ -57,8 +69,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-dash': {
           templateUrl: 'templates/tab-game-detail.html',
           controller: 'GameDetailCtrl',
-		   resolve: {
-           onegames: function(Games, $stateParams) {
+		  resolve: {
+          onegame: function(Games, $stateParams) {
           return Games.get($stateParams.gameId); }
 		}
 		}
@@ -69,17 +81,39 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
         'tab-chats': {
           templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
+          controller: 'ChatsCtrl',
+		  resolve: {
+          alllists: function(Lists) {
+          return Lists.all(); }
+		}
+		}
       }
     })
     .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+      url: '/chats/:listId',
       views: {
         'tab-chats': {
           templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
+          controller: 'ChatDetailCtrl',
+		  resolve: {
+          gamesfromlist: function(Games, $stateParams) {
+          return Games.formList($stateParams.listId); }
+		}
+		}
+      }
+    })
+	
+	.state('tab.chat-detail-game-detail', {
+      url: '/chats/:list/game/:gameId',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-game-detail.html',
+          controller: 'GameDetailCtrl',
+		  resolve: {
+          onegame: function(Games, $stateParams) {
+          return Games.get($stateParams.gameId); }
+		}
+		}
       }
     })
 	

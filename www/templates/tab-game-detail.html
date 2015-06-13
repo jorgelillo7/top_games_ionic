@@ -12,5 +12,17 @@
     <p>
       {{game.descripcion}}
     </p>
+	
+	Plataformas disponibles:
+	<div ng-repeat="plataforma in game.lista_plataformas">
+		<div ng-if="plataforma.letra_blanca == true">
+			<b style="color: white;border-radius: 4px; background-color: {{ plataforma.color }}">{{ plataforma.nombre }}</b>
+		</div>
+		<div ng-if="video != video.large">
+		<b style="border-radius: 4px; background-color: {{ plataforma.color }}">{{ plataforma.nombre }}</b>
+		</div>
+     <p>
+	</div>
+      
   </ion-content>
 </ion-view>

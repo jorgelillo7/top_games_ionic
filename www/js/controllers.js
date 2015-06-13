@@ -4,12 +4,12 @@ angular.module('starter.controllers', [])
   $scope.games = allgames;
 })
 
-.controller('GameDetailCtrl', function($scope, $stateParams, onegames) {
+.controller('GameDetailCtrl', function($scope, $stateParams, onegame) {
 	
-  $scope.game = onegames;
+  $scope.game = onegame;
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChatsCtrl', function($scope, alllists) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -18,20 +18,14 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
   
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
+  $scope.lists = alllists;
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('ChatDetailCtrl', function($scope, $stateParams, gamesfromlist) {
+  $scope.gamesfromlist = gamesfromlist;
 })
 
 .controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
 })
 
 .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $http) {

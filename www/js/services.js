@@ -1,4 +1,5 @@
 var SERVER_URL = 'http://127.0.0.1:8000/api/';
+var idUser = 0;
 angular.module('starter.services', [])
 
 .factory('Games', function($http, $q) {
@@ -12,12 +13,44 @@ var games = [];
       });
       return dfd.promise;
     },
+	formList: function(listId){
+	  var gamesFromList = [];
+      var dfd = $q.defer();
+      $http.get(SERVER_URL + "games/fromList/" + listId).then(function(response){
+        gamesFromList = response.data;
+        dfd.resolve(gamesFromList);
+      });
+      return dfd.promise;
+    },
     get: function(gameId) {
 		var game = [];
 		var dfd = $q.defer();
        $http.get(SERVER_URL + "games/" + gameId).then(function(response){
 	   game = response.data.juego
        dfd.resolve(game);
+      });
+      return dfd.promise;
+    }
+  }
+})
+
+.factory('Lists', function($http, $q) {
+var lists = [];
+  return {
+    all: function(){
+      var dfd = $q.defer();
+      $http.get(SERVER_URL + "lists/fromUser/" + idUser).then(function(response){
+        lists = response.data;
+        dfd.resolve(lists);
+      });
+      return dfd.promise;
+    },
+    get: function(listId) {
+		var list = [];
+		var dfd = $q.defer();
+       $http.get(SERVER_URL + "lists/" + listId).then(function(response){
+	   list = response.data.juego
+       dfd.resolve(list);
       });
       return dfd.promise;
     }
@@ -85,6 +118,7 @@ var games = [];
                 pass: pw
             }, { withCredentials: true }).success(function(data) {
 					 if(data.login == true){
+						 idUser = data.idUser;  
 						 deferred.resolve('Welcome ' + name + '!');
 					 } else {
 						 deferred.reject('Wrong credentials.');
