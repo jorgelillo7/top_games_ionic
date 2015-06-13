@@ -1,17 +1,37 @@
 <ion-view view-title="Juegos de lista">
   <ion-content>
     <ion-list>
-	
-	{{gamesfromlist.lista.nombre}}
-	{{gamesfromlist.lista.autor_original}}
-	
+	<div class="card">
+	  <div class="item item-text-wrap">
+		<b style="color: rgb(106, 160, 208);">Lista: {{gamesfromlist.lista.nombre}} </b>
+		<p>
+	    <b>Autor original:</b> {{gamesfromlist.lista.autor_original}}
+	  </div>
+	</div>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="game in gamesfromlist.juegos" type="item-text-wrap" href="#/tab/chats/{{gamesfromlist.lista.id}}/game/{{game.id}}">
         <img ng-src="{{'data:image/png;base64,'+game.image_bytes}}" >
-		<h2>{{game.titulo}}</h2>
+		<h2 style="color: rgb(106, 160, 208);">{{game.titulo}}</h2>
         <p>{{game.descripcion}}</p>
+		<div ng-repeat="plataforma in game.lista_plataformas">
+			<div style = "float:left;">
+				<div ng-if="plataforma.letra_blanca == true">
+					<b style="color: white;border-radius: 4px; float: left; background-color: {{ plataforma.color }}">{{ plataforma.nombre }}</b>
+					&nbsp;
+				</div>
+				<div ng-if="plataforma.letra_blanca != true">
+				<b style="border-radius: 4px; float: left; background-color: {{ plataforma.color }}">{{ plataforma.nombre }}</b>
+					&nbsp;
+				</div>
+			</div>
+		</div>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
       </ion-item>
+	  <div ng-if="gamesfromlist.juegos.length == 0">
+		   <div style="padding-left:25px">
+			    Lista sin juegos :(
+		   </div>
+	   </div>
     </ion-list>
   </ion-content>
 </ion-view>

@@ -1,11 +1,22 @@
-<ion-view view-title="Lists">
+<ion-view view-title="Listas del usuario">
   <ion-content>
     <ion-list>
-	{{lists.user.username}}
-	{{lists.user.is_admin}}
+	<div class="card">
+	  <div class="item item-text-wrap">
+		<b>Usuario:</b> {{lists.user.username}}
+		<p>
+		<div ng-if="lists.user.is_admin == true">
+			<b>Administrador:</b> <i class="ion-android-done" style="color:green"></i>
+		</div>
+		<div ng-if="lists.user.is_admin != true">
+			<b>Administrador:</b> <i class="ion-android-close" style="color:red"></i>
+		</div>
+	  </div>
+	</div>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="list in lists.listas" type="item-text-wrap" href="#/tab/chats/{{list.id}}">
-        <h2>{{list.nombre}}</h2>
+        <h2 style="color: rgb(106, 160, 208);">{{list.nombre}}</h2>
         <p>Autor original: {{list.autor_original}}</p>
+		<p>{{list.descripcion}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
       </ion-item>

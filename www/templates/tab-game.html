@@ -3,13 +3,23 @@
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="game in games.juegos" type="item-text-wrap" href="#/tab/dash/{{game.id}}">
         <img ng-src="{{'data:image/png;base64,'+game.image_bytes}}" >
-		<h2>{{game.titulo}}</h2>
+		<h2 style="color: rgb(106, 160, 208);">{{game.titulo}}</h2>
         <p>{{game.descripcion}}</p>
+		<div ng-repeat="plataforma in game.lista_plataformas">
+			<div style = "float:left;">
+				<div ng-if="plataforma.letra_blanca == true">
+					<b style="color: white;border-radius: 4px; float: left; background-color: {{ plataforma.color }}">{{ plataforma.nombre }}</b>
+					&nbsp;
+				</div>
+				<div ng-if="plataforma.letra_blanca != true">
+				<b style="border-radius: 4px; float: left; background-color: {{ plataforma.color }}">{{ plataforma.nombre }}</b>
+					&nbsp;
+				</div>
+			</div>
+    
+		</div>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

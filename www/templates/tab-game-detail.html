@@ -6,19 +6,18 @@
 -->
 
 <ion-view view-title="{{game.titulo}}">
-<b>aaaa</b>
   <ion-content class="padding">
-      <img ng-src="{{'data:image/png;base64,'+game.image_bytes}}" style="width: 200px; height: 200px">
+      <img ng-src="{{'data:image/png;base64,'+game.image_bytes}}" style="width: 200px; height: 200px; text-align:center;">
     <p>
       {{game.descripcion}}
     </p>
 	
-	Plataformas disponibles:
+	<b style="color: rgb(106, 160, 208);">Plataformas disponibles:</b>
 	<div ng-repeat="plataforma in game.lista_plataformas">
 		<div ng-if="plataforma.letra_blanca == true">
 			<b style="color: white;border-radius: 4px; background-color: {{ plataforma.color }}">{{ plataforma.nombre }}</b>
 		</div>
-		<div ng-if="video != video.large">
+		<div ng-if="plataforma.letra_blanca != true">
 		<b style="border-radius: 4px; background-color: {{ plataforma.color }}">{{ plataforma.nombre }}</b>
 		</div>
      <p>
