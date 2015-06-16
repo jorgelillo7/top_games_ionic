@@ -1,19 +1,21 @@
 angular.module('starter.controllers', [])
 
 .controller('GameCtrl', function($scope, allgames, $http, Games) {
+	var gameOffset = 3;
   $scope.games = [];
   Games.all().then(function(items){
 	$scope.games = items;
   });
   
   $scope.loadMore = function() {
-    $http.get(SERVER_URL + "games").success(function(items) {
+    $http.get(SERVER_URL + "moreGames/" + gameOffset).success(function(items) {
 		var oldGames= $scope.games;
 		var newGames = items.juegos; 
 	  $scope.games = oldGames.concat(newGames);
+	  gameOffset = oldGames.concat(newGames).length;
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
-  };
+  }; 
  
 })
 
