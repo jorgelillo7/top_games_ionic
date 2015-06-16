@@ -8,7 +8,7 @@ var games = [];
     all: function(){
       var dfd = $q.defer();
       $http.get(SERVER_URL + "games").then(function(response){
-        games = response.data;
+        games = response.data.juegos;
         dfd.resolve(games);
       });
       return dfd.promise;

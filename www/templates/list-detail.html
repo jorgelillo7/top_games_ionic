@@ -8,7 +8,7 @@
 	    <b>Autor original:</b> {{gamesfromlist.lista.autor_original}}
 	  </div>
 	</div>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="game in gamesfromlist.juegos" type="item-text-wrap" href="#/tab/chats/{{gamesfromlist.lista.id}}/game/{{game.id}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="game in gamesfromlist.juegos" type="item-text-wrap" href="#/tab/lists/{{gamesfromlist.lista.id}}/game/{{game.id}}">
         <img ng-src="{{'data:image/png;base64,'+game.image_bytes}}" >
 		<h2 style="color: rgb(106, 160, 208);">{{game.titulo}}</h2>
         <p>{{game.descripcion}}</p>

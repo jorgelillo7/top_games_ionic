@@ -50,12 +50,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.game', {
+    url: '/game',
     views: {
-      'tab-dash': {
+      'tab-game': {
         templateUrl: 'templates/tab-game.html',
-        controller: 'DashCtrl',
+        controller: 'GameCtrl',
 		resolve: {
         allgames: function(Games) {
           return Games.all(); }
@@ -63,11 +63,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
-  .state('tab.dash-detail', {
-      url: '/dash/:gameId',
+  .state('tab.game-detail', {
+      url: '/game/:gameId',
       views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-game-detail.html',
+        'tab-game': {
+          templateUrl: 'templates/game-detail.html',
           controller: 'GameDetailCtrl',
 		  resolve: {
           onegame: function(Games, $stateParams) {
@@ -76,12 +76,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 		}
 	  }
     })
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.lists', {
+      url: '/lists',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl',
+        'tab-lists': {
+          templateUrl: 'templates/tab-lists.html',
+          controller: 'ListsCtrl',
 		  resolve: {
           alllists: function(Lists) {
           return Lists.all(); }
@@ -89,12 +89,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 		}
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:listId',
+    .state('tab.lists-detail', {
+      url: '/lists/:listId',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl',
+        'tab-lists': {
+          templateUrl: 'templates/list-detail.html',
+          controller: 'ListDetailCtrl',
 		  resolve: {
           gamesfromlist: function(Games, $stateParams) {
           return Games.formList($stateParams.listId); }
@@ -103,11 +103,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 	
-	.state('tab.chat-detail-game-detail', {
-      url: '/chats/:list/game/:gameId',
+	.state('tab.lists-detail-game-detail', {
+      url: '/lists/:list/game/:gameId',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-game-detail.html',
+        'tab-lists': {
+          templateUrl: 'templates/game-detail.html',
           controller: 'GameDetailCtrl',
 		  resolve: {
           onegame: function(Games, $stateParams) {
@@ -123,12 +123,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       controller: 'LoginCtrl'
   })
 
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.about', {
+    url: '/about',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-about': {
+        templateUrl: 'templates/tab-about.html',
+        controller: 'AboutCtrl'
       }
     }
   });

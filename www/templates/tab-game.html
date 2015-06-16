@@ -1,7 +1,7 @@
 <ion-view view-title="Juegos">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="game in games.juegos" type="item-text-wrap" href="#/tab/dash/{{game.id}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="game in games" type="item-text-wrap" href="#/tab/game/{{game.id}}">
         <img ng-src="{{'data:image/png;base64,'+game.image_bytes}}" >
 		<h2 style="color: rgb(106, 160, 208);">{{game.titulo}}</h2>
         <p>{{game.descripcion}}</p>
@@ -22,5 +22,9 @@
 
       </ion-item>
     </ion-list>
+	<ion-infinite-scroll
+    on-infinite="loadMore()"
+    distance="1%">
+  </ion-infinite-scroll>
   </ion-content>
 </ion-view>
