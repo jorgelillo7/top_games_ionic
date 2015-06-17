@@ -57,8 +57,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         templateUrl: 'templates/tab-game.html',
         controller: 'GameCtrl',
 		resolve: {
-        allgames: function(Games) {
-          return Games.all(); }
+        firstgames: function(Games) {
+          return Games.firstGames(); }
       }
       }
     }

@@ -1,9 +1,9 @@
 angular.module('starter.controllers', [])
 
-.controller('GameCtrl', function($scope, allgames, $http, Games) {
-	var gameOffset = 3;
+.controller('GameCtrl', function($scope, firstgames, $http, Games) {
+  var gameOffset = 3;
   $scope.games = [];
-  Games.all().then(function(items){
+  Games.firstGames().then(function(items){
 	$scope.games = items;
   });
   
@@ -20,19 +20,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('GameDetailCtrl', function($scope, $stateParams, onegame) {
-	
   $scope.game = onegame;
 })
 
 .controller('ListsCtrl', function($scope, alllists) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-  
   $scope.lists = alllists;
 })
 
@@ -51,8 +42,8 @@ angular.module('starter.controllers', [])
             $state.go('tab.game');
         }).error(function(data) {
             var alertPopup = $ionicPopup.alert({
-                title: 'Login failed!',
-                template: 'Please check your credentials!'
+                title: 'Error al iniciar sesión',
+                template: 'Por favor revise sus credenciales'
             });
         });
     }
